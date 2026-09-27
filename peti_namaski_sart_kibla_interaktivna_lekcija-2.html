@@ -1,0 +1,53 @@
+<!doctype html><html lang="bs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Peti namaski šart – Kibla</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial;background:#073f36;color:#18221f}.app{max-width:850px;margin:auto;min-height:100vh;background:#fff7dc}
+header{padding:14px;text-align:center;color:#fff;background:linear-gradient(135deg,#063d34,#08735f);border-bottom:4px solid #f4c84e}h1{margin:0;color:#ffd84d;font-size:clamp(25px,6vw,42px)}header p{margin:4px}
+main{padding:10px}.card{background:#fff;border:2px solid #efd071;border-radius:18px;padding:14px;margin:10px 0;box-shadow:0 4px 12px #0002}h2,h3{color:#075447}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.tabs button,.btn{border:0;border-radius:13px;padding:12px 7px;font-weight:900;color:#fff;font-size:15px}.learn{background:#d54238}.game{background:#e37c19}.quiz{background:#773bc0}.btn{background:#075447;width:100%;margin-top:8px}
+.pill{display:inline-block;padding:6px 10px;margin:4px;background:#e7f7f2;border-radius:999px;font-weight:800}.panel{display:none}.panel.on{display:block}
+.world{position:relative;height:280px;border-radius:18px;overflow:hidden;background:radial-gradient(circle at 50% 50%,#75c5ef 0 28%,#2b8fc6 29% 55%,#17649b 56%);border:4px solid #e6bd45}
+.kaba{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:72px;height:72px;background:#171717;border:7px solid #111;border-top:18px solid #d6b447;box-shadow:0 3px 8px #0008}.person{position:absolute;font-size:34px;cursor:pointer;user-select:none;transition:.4s}.person.done{filter:drop-shadow(0 0 5px #0f5)}
+.q{font-weight:900;padding:10px;background:#fff8df;border-radius:12px;margin:8px 0}.opts{display:grid;gap:7px}.opts button{padding:11px;border:2px solid #9fcfc2;border-radius:12px;background:white;text-align:left;font-weight:800}.ok{background:#dff6e7!important}.bad{background:#ffe0e0!important}
+.score{display:flex;justify-content:space-between;background:#073f36;color:#fff;padding:9px 12px;border-radius:12px;font-weight:900}.match{display:grid;grid-template-columns:1fr 1fr;gap:7px}.match button{padding:10px;border:2px solid #d8b955;border-radius:12px;background:#fff;font-weight:800}.selected{background:#fff0a8!important}
+.nature{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.nature div{background:#edf8f4;border-radius:13px;padding:10px;text-align:center;font-weight:700}.feedback{text-align:center;font-weight:900;min-height:28px;padding:5px}.footer{text-align:center;background:#efd071;padding:13px;font-weight:900}
+</style></head><body><div class="app"><header><h1>🕋 PETI NAMASKI ŠART</h1><p>Okretanje prema Kibli – Kabi</p><small>Pripremio Abdo ef. Rekić</small></header><main>
+<div class="score"><span>Interaktivna lekcija</span><span id="score">Bodovi: 0</span></div>
+<div class="tabs"><button class="learn" onclick="show('uc')">📖 NAUČI</button><button class="game" onclick="show('vj')">🎮 VJEŽBAJ</button><button class="quiz" onclick="show('kv')">❓ KVIZ</button></div>
+<section id="uc" class="card panel on"><h2>Šta je Kibla?</h2><p><b>Peti šart – uvjet za namaz</b> jeste okrenuti se prema Kibli. <b>Kibla je smjer prema Kabi u Mekki.</b> Muslimani iz cijelog svijeta okreću se prema Kabi kada klanjaju.</p>
+<span class="pill">🕋 Kaba</span><span class="pill">📍 Mekka</span><span class="pill">🧭 Kibla</span><span class="pill">⚫ Hadžerul-esved</span>
+<h3>Kaba</h3><p>Kaba je Allahov hram u Mekki i Kibla muslimana. U jednom uglu Kabe nalazi se Hadžerul-esved – crni kamen. Prostor oko Kabe naziva se Harem-i-šerif.</p>
+<h3>Kako odrediti smjer Kible?</h3><p>Možemo koristiti <b>kompas ili GPS/aplikaciju</b>. Lekcija također objašnjava Kibla-sat: u određenom trenutku pravac sjene posmatranog predmeta pokazuje pravac suprotan pravcu Kible.</p>
+<div class="nature"><div>🌳<br>Krošnja drveta na južnoj strani obično je bujnija.</div><div>🪵<br>Godovi panja uži su na sjevernoj, a širi na južnoj strani.</div><div>🌿<br>Na sjevernoj strani kore drveta češće ima mahovine.</div><div>🐜<br>Mravinjak se može nalaziti na južnoj strani panja, kamena ili grma.</div></div></section>
+<section id="vj" class="card panel"><h2>1. Okreni se prema Kabi</h2><p>Dodirni svakog učenika. On će se simbolično okrenuti prema Kabi.</p><div class="world" id="world"><div class="kaba"></div><div class="person" style="left:8%;top:12%">🧒</div><div class="person" style="right:8%;top:14%">👦</div><div class="person" style="left:10%;bottom:10%">👧</div><div class="person" style="right:10%;bottom:10%">🧑</div></div><div id="gfb" class="feedback"></div>
+<h2>2. Spoji pojmove</h2><div id="match" class="match"></div><div id="mfb" class="feedback"></div></section>
+<section id="kv" class="card panel"><h2>Provjeri znanje</h2><div id="quizbox"></div></section>
+</main><div class="footer">Nauči • Vježbaj • Provjeri znanje</div></div>
+<script>
+let score=0;const S=()=>document.getElementById('score').textContent='Bodovi: '+score;
+function show(x){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));document.getElementById(x).classList.add('on')}
+document.querySelectorAll('.person').forEach(p=>p.onclick=()=>{if(p.classList.contains('done'))return;p.classList.add('done');let w=document.getElementById('world').getBoundingClientRect(),r=p.getBoundingClientRect(),dx=w.left+w.width/2-(r.left+r.width/2),dy=w.top+w.height/2-(r.top+r.height/2),a=Math.atan2(dy,dx)*180/Math.PI;p.style.transform=`rotate(${a+90}deg)`;score+=10;S();document.getElementById('gfb').textContent='✓ Okrenut/a prema Kabi! +10'});
+const pairs=[['Kibla','Smjer prema Kabi'],['Kaba','Mekka'],['Kompas','Određivanje pravca'],['Hadžerul-esved','Crni kamen'],['Harem-i-šerif','Prostor oko Kabe'],['GPS','Pomaže odrediti smjer Kible']];
+let left=pairs.map(x=>x[0]).sort(()=>Math.random()-.5),right=pairs.map(x=>x[1]).sort(()=>Math.random()-.5),sel=null;
+document.getElementById('match').innerHTML=left.map(x=>`<button data-a="${x}" onclick="pick(this,'a')">${x}</button>`).join('')+right.map(x=>`<button data-b="${x}" onclick="pick(this,'b')">${x}</button>`).join('');
+function pick(b,t){if(t==='a'){document.querySelectorAll('[data-a]').forEach(x=>x.classList.remove('selected'));sel=b.dataset.a;b.classList.add('selected')}else if(sel){let good=pairs.some(p=>p[0]===sel&&p[1]===b.dataset.b);if(good){score+=10;b.classList.add('ok');document.querySelector(`[data-a="${sel}"]`).classList.add('ok');document.getElementById('mfb').textContent='✓ Tačno! +10'}else{score-=3;b.classList.add('bad');document.getElementById('mfb').textContent='✗ Pokušaj ponovo. −3'}S();sel=null}}
+const qs=[
+['Koji je peti namaski šart?',['Okretanje prema Kibli','Abdest','Nijet'],0],
+['Šta je Kibla?',['Smjer prema Kabi u Mekki','Vrijeme namaza','Mjesto za abdest'],0],
+['Gdje se nalazi Kaba?',['U Mekki','U Medini','U Jerusalemu'],0],
+['Čemu služi kompas u ovoj lekciji?',['Određivanju pravca','Mjerenju vremena','Brojanju rekata'],0],
+['Kako se zove crni kamen ugrađen u Kabu?',['Hadžerul-esved','Mekami-Ibrahim','Zemzem'],0],
+['Kako se zove sveti prostor oko Kabe?',['Harem-i-šerif','Kibla-sat','Mihrab'],0],
+['Prema čemu se muslimani okreću u namazu?',['Prema Kibli','Prema izlasku Sunca uvijek','Prema najbližoj džamiji'],0],
+['Šta može pomoći u određivanju Kible?',['GPS/aplikacija','Termometar','Kalkulator'],0],
+['Na kojoj strani drveta lekcija navodi više mahovine?',['Na sjevernoj','Na južnoj','Uvijek na istočnoj'],0],
+['Kakvi su godovi panja prema lekciji?',['Uži na sjevernoj, širi na južnoj strani','Širi na sjevernoj, uži na južnoj','Svuda jednaki'],0],
+['Na kojoj strani panja, kamena ili grma lekcija smješta mravinjak?',['Na južnoj','Na sjevernoj','Na zapadnoj'],0],
+['Kaba je Kibla…',['muslimana','samo stanovnika Mekke','samo hadžija'],0],
+['Kibla-sat koristi odnos…',['Sunca i sjene','Mjeseca i zvijezda isključivo','kiše i vjetra'],0],
+['Da li se muslimani širom svijeta u namazu okreću prema Kabi?',['Da','Ne','Samo petkom'],0],
+['Šta prvo uradimo ako ne znamo smjer Kible?',['Potrudimo se da ga odredimo','Klanjamo u bilo kojem smjeru bez pokušaja','Odustanemo od namaza'],0]
+];let qi=0;
+function draw(){if(qi>=qs.length){document.getElementById('quizbox').innerHTML=`<div style="text-align:center;font-size:60px">🏆</div><h2 style="text-align:center">Bravo!</h2><p style="text-align:center">Savladao/la si lekciju o petom namaskom šartu.<br><b>Ukupno bodova: ${score}</b></p><button class="btn" onclick="qi=0;draw()">Ponovi kviz</button>`;return}let q=qs[qi],arr=q[1].map((x,i)=>[x,i]).sort(()=>Math.random()-.5);document.getElementById('quizbox').innerHTML=`<div class="q">${qi+1}/15 — ${q[0]}</div><div class="opts">${arr.map(x=>`<button onclick="answer(this,${x[1]===q[2]})">${x[0]}</button>`).join('')}</div><div id="qfb" class="feedback"></div>`}
+function answer(b,ok){if(b.parentNode.dataset.done)return;b.parentNode.dataset.done=1;if(ok){b.classList.add('ok');score+=10;document.getElementById('qfb').textContent='✓ Tačno! +10';tone(650)}else{b.classList.add('bad');score-=3;document.getElementById('qfb').textContent='✗ Netačno. −3';tone(180)}S();setTimeout(()=>{qi++;draw()},700)}
+function tone(f){try{let a=new AudioContext(),o=a.createOscillator(),g=a.createGain();o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(a.destination);o.start();setTimeout(()=>{o.stop();a.close()},150)}catch(e){}}
+draw();
+</script></body></html>
